@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS tweet CASCADE;
 CREATE TABLE IF NOT EXISTS tweet (
-	handle integer NOT NULL
+	handle integer NOT NULL,
 	timeTweeted timestamp NOT NULL,
 	PRIMARY KEY(timeTweeted, handle),
 	favouriteCount integer CONSTRAINT positive_favcount CHECK (favouriteCount >= 0),
@@ -11,17 +11,15 @@ CREATE TABLE IF NOT EXISTS tweet (
 
 DROP TABLE IF EXISTS hashtag CASCADE;
 CREATE TABLE IF NOT EXISTS hashtag (
-	tag varchar
+	tag varchar PRIMARY KEY
 );
 
 DROP TABLE IF EXISTS has CASCADE;
 CREATE TABLE IF NOT EXISTS has (
 	timeTweeted timestamp NOT NULL,
 	handle integer NOT NULL,
-	FOREIGN KEY (timeTweeted, handle 
+	FOREIGN KEY (timeTweeted, handle)
 		references tweet(timeTweeted, handle),
-	tag integer
+	tag varchar
 		references hashtag(tag)
 );
-
-
